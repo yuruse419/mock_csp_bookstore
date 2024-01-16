@@ -1,3 +1,5 @@
+/* global site styling behaviors */
+
 *, *:before, *:after {
   box-sizing: border-box;
   text-wrap: wrap;
@@ -30,7 +32,6 @@ legend {
   padding: 0.5em;
 }
 
-/* pointer cursor elements */
 input[type=button], input[type=submit] {
   cursor: pointer;
 }
