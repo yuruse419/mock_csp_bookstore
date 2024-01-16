@@ -1,0 +1,39 @@
+#login-main {
+  min-width: min-content;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+#login-form {
+  background-color: #003055;
+  padding: 0.5em;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+#login-authenticate-fieldset {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid;
+}
+
+#username-input, #password-input {
+  margin: 0.5em;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#login-submit-fieldset {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+#register-button, #submit-button {
+  width: 40%;
+  background-color: transparent;
+  padding: 0.5em;
+  border-radius: 10px;
+}
