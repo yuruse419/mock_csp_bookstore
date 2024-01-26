@@ -1,11 +1,23 @@
 #page-header {
-  width: 100vw;
+  width: 100%;
   height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
   background-color: #003055;
+  padding: 10px;
   border-bottom: 1px solid;
 }
 
 #page-h1 {
   color: #E6B220;
   text-decoration:underline;
+  margin: 0;
+}
+
+#logout-button {
+  margin: 5px;
+  border-radius: 10px;
 }

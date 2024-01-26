@@ -1,69 +1,60 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../../css/main/LoginComponent.css'
+import AuthContext from '../../contexts/AuthContext'
 
-class LoginComponent extends React.Component {
-  // LoginComponent constructor
-  constructor(props) {
-    super(props)
+const LoginComponent = () => {
+  const { username, setUsername, password, setPassword } = useContext(AuthContext)
 
-    // create username and password states
-    this.state = {
-      username: '',
-      password: ''
-    }
-  }
-
-  /* 
-    arrow functions have no binding to the this keyword,
-    so explicit binding is not required
-    (i.e., this in an arrow function maintains its reference to the class instance)
-  */
+  const navigate = useNavigate()
 
   // username state setter
-  handleUsernameOnChange = (e) => {
-    this.setState({ username: e.target.value })
+  const handleUsernameOnChange = (e) => {
+    setUsername(e.target.value)
   }
 
   // password state setter
-  handlePasswordOnChange = (e) => {
-    this.setState({ password: e.target.value })
+  const handlePasswordOnChange = (e) => {
+    setPassword(e.target.value)
   }
 
-  render() {
-    return(
-      // login main
-      <main id='login-main'>
-        {/* authentication form */}
-        <form id='login-form'>
-          {/* authentication fieldset */}
-          <fieldset id='login-authenticate-fieldset'>
-            <legend>Authenticate</legend>
-
-            {/* username input */}
-            <label hidden htmlFor='username-input'></label>
-            <input id='username-input' placeholder='username' onChange={ this.handleUsernameOnChange }></input>
-
-            {/* password input */}
-            <label hidden htmlFor='password-input'></label>
-            <input id='password-input' placeholder='password' onChange={ this.handlePasswordOnChange }></input>
-          </fieldset>
-
-          {/* submit fieldset */}
-          <fieldset id='login-submit-fieldset'>
-            <legend>Submit</legend>
-
-            {/* register button */}
-            <input id='register-button' type='button' value='Register'></input>
-            <label hidden htmlFor='register-button'></label>
-
-            {/* login button */}
-            <input id='submit-button' type='submit' value='Login'></input>
-            <label hidden htmlFor='submit-button'></label>
-          </fieldset>
-        </form>
-      </main>
-    )
+  const handleLoginOnClick = (e) => {
+    navigate('/category/apparel')
   }
+
+    return (
+    // login main
+    <main id='login-main'>
+      {/* authentication form */}
+      <form id='login-form'>
+        {/* authentication fieldset */}
+        <fieldset id='login-authenticate-fieldset'>
+          <legend>Authenticate</legend>
+
+          {/* username input */}
+          <label hidden htmlFor='username-input'></label>
+          <input id='username-input' placeholder='username' value={ username } onChange={ handleUsernameOnChange }></input>
+
+          {/* password input */}
+          <label hidden htmlFor='password-input'></label>
+          <input id='password-input' placeholder='password' value={ password } onChange={ handlePasswordOnChange }></input>
+        </fieldset>
+
+        {/* submit fieldset */}
+        <fieldset id='login-submit-fieldset'>
+          <legend>Submit</legend>
+
+          {/* register button */}
+          <input id='register-button' type='button' value='Register'></input>
+          <label hidden htmlFor='register-button'></label>
+
+          {/* login button */}
+          <input id='submit-button' type='submit' value='Login' onClick={ handleLoginOnClick }></input>
+          <label hidden htmlFor='submit-button'></label>
+        </fieldset>
+      </form>
+     </main>
+  )
 }
 
 export default LoginComponent
