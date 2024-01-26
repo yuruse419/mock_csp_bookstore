@@ -37,7 +37,7 @@ const LoginComponent = () => {
 
           {/* password input */}
           <label hidden htmlFor='password-input'></label>
-          <input id='password-input' placeholder='password' value={ password } onChange={ handlePasswordOnChange }></input>
+          <input id='password-input' type='password' placeholder='password' value={ password } onChange={ handlePasswordOnChange }></input>
         </fieldset>
 
         {/* submit fieldset */}
@@ -45,7 +45,7 @@ const LoginComponent = () => {
           <legend>Submit</legend>
 
           {/* register button */}
-          <input id='register-button' type='button' value='Register'></input>
+          <input id='register-button' type='submit' value='Register'></input>
           <label hidden htmlFor='register-button'></label>
 
           {/* login button */}
