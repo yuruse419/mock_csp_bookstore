@@ -1,12 +1,9 @@
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
 import '../../css/main/LoginComponent.css'
 import AuthContext from '../../contexts/AuthContext'
 
 const LoginComponent = () => {
-  const { username, setUsername, password, setPassword } = useContext(AuthContext)
-
-  const navigate = useNavigate()
+  const { username, setUsername, password, setPassword, setIsLoggedIn } = useContext(AuthContext)
 
   // username state setter
   const handleUsernameOnChange = (e) => {
@@ -19,7 +16,9 @@ const LoginComponent = () => {
   }
 
   const handleLoginOnClick = (e) => {
-    navigate('/category/apparel')
+    e.preventDefault()
+
+    setIsLoggedIn(true)
   }
 
     return (

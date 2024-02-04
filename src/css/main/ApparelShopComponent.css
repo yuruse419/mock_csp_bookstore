@@ -1,16 +1,13 @@
 #apparel-main {
-  width: 100%;
-  height: max-content;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 10px;
 }
 
-#apparel-main-heading-section {
+#apparel-main-header {
   background-color: #003055;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 }
 
 #apparel-sort-section {
@@ -35,11 +32,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-y: scroll;
   margin: 0;
   padding: 0;
   border: 1px solid;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
 }
 
 .apparel-item {
@@ -70,5 +66,16 @@
 }
 
 .apparel-item-description {
-  height: 2.2em;
+  height: 3em;
+  overflow: hidden;
+  border-top: 1px solid;
+}
+
+.apparel-item-price {
+  border-top: 1px solid;
+}
+
+.apparel-item-add-to-cart-button {
+  width: 100%;
+  border: none;
 }

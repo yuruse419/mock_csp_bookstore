@@ -17,7 +17,23 @@
   margin: 0;
 }
 
+.navigation-button {
+  border: none;
+  text-decoration: underline;
+}
+
+#user-profile-form {
+  display: flex;
+  align-items: center;
+}
+
+#cart-button-container {
+  height: 100%;
+  padding: 0;
+}
+
 #logout-button {
   margin: 5px;
-  border-radius: 10px;
+  border: 1px solid;
+  border-radius: 5px;
 }

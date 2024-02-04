@@ -21,7 +21,6 @@
 
 #username-input, #password-input {
   margin: 0.5em;
-  border-radius: 10px;
   text-align: center;
 }
 
@@ -35,5 +34,6 @@
   width: 40%;
   background-color: transparent;
   padding: 0.5em;
+  border: 1px solid;
   border-radius: 10px;
 }

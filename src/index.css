@@ -42,8 +42,6 @@ figcaption {
 
 p, figcaption {
   margin: 0;
-  line-height: 1.1em;
-  overflow: hidden;
 }
 
 img {
@@ -58,4 +56,16 @@ input[type=button], input[type=submit], details {
 input, input::placeholder {
   color: inherit;
   background-color: inherit;
+}
+
+.overlayed-button-container {
+  position: relative;
+}
+
+.overlayed-button {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  border: none;
 }

@@ -1,9 +1,45 @@
 import React, { useContext } from 'react'
 import ApparelContext from '../../contexts/ApparelContext'
+import CheckoutContext from '../../contexts/CheckoutContext'
 import '../../css/main/ApparelShopComponent.css'
 
 const ApparelShopComponent = () => {
   const { apparelItems, setSortedBy } = useContext(ApparelContext)
+  const { setCart } = useContext(CheckoutContext)
+
+  /* generateApparelItem helper functions */
+
+  const handleAddToCartOnClick = (e) => {
+    const idDelimiter = e.target.id.indexOf('-')
+    const itemId = Number(e.target.id.substring(0, idDelimiter))
+
+    setCart((oldCart) => {
+      const newCart = { items: { ...oldCart.items }, totalPrice: oldCart.totalPrice, totalItems: oldCart.totalItems }
+
+      if(newCart.items[`${itemId}-apparel`]) {
+        newCart.items[`${itemId}-apparel`] = { ...newCart.items[`${itemId}-apparel`] }
+
+        newCart.items[`${itemId}-apparel`].quantity++
+
+        newCart.totalPrice += newCart.items[`${itemId}-apparel`].price
+        newCart.totalItems += 1
+      }
+      else {
+        for(let item of apparelItems) {
+          if(item.id === itemId) {
+            newCart.items[`${itemId}-apparel`] = { ...item, quantity: 1 }
+
+            newCart.totalPrice += newCart.items[`${itemId}-apparel`].price
+            newCart.totalItems += 1
+
+            break
+          }
+        }
+      }
+
+      return newCart
+    })
+  }
 
   // generate a list item
   const generateApparelItem = (item) => {
@@ -38,7 +74,12 @@ const ApparelShopComponent = () => {
           <h2 hidden>{ item.title } Details</h2>
 
           <p className='apparel-item-description'>{ item.description }</p>
-          <p>${ item.price }</p>
+
+          <p className='apparel-item-price'>${ item.price }</p>
+        </section>
+
+        <section>
+          <input id={ `${item.id}-apparel-item-add-to-cart-button` } className='apparel-item-add-to-cart-button' type='button' value='Add to Cart' onClick={ handleAddToCartOnClick }></input>
         </section>
       </li>
     )
@@ -47,32 +88,33 @@ const ApparelShopComponent = () => {
   // handle sort button onClick
   const handleSortOnClick = (e) => {
     setSortedBy((oldSortedBy) => {
-      let newSortedBy
+      const delimiter = oldSortedBy.indexOf(' ')
+
+      let property = oldSortedBy.substring(0, delimiter)
+      let orientation = oldSortedBy.substring(delimiter + 1)
 
       // if sort button value is 'Title'
       if(e.target.value === 'Title') {
-        // set sort by to 'title '
-        newSortedBy = 'title '
+        if(property === 'title' && orientation === 'asc') {
+          orientation = 'des'
+        }
+        else {
+          property = 'title'
+          orientation = 'asc'
+        }
       }
       // else if sort button value is 'Price'
       else if(e.target.value === 'Price') {
-        // set sort by to 'price '
-        newSortedBy = 'price '
+        if(property === 'price' && orientation === 'asc') {
+          orientation = 'des'
+        }
+        else {
+          property = 'price'
+          orientation = 'asc'
+        }
       }
 
-      // if previous sort orientation was ascending
-      if(oldSortedBy.substring(oldSortedBy.length - 3) === 'asc') {
-        // concatenate 'des' to sort by
-        newSortedBy += 'des'
-      }
-      // else if previous sort orientation was descending
-      else {
-        // concatenate asc to sort by
-        newSortedBy += 'asc'
-      }
-
-      // return the new sort-by value
-      return newSortedBy
+      return `${property} ${orientation}`
     })
   }
 
@@ -80,7 +122,7 @@ const ApparelShopComponent = () => {
     // page main
     <main id='apparel-main'>
       {/* main head */}
-      <header id='apparel-main-heading-section'>
+      <header id='apparel-main-header'>
         <h2>Apparel</h2>
       </header>
 
