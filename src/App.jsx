@@ -1,26 +1,22 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import LoginPage from './pages/LoginPage'
-import ApparelShopPage from './pages/ApparelShopPage'
-import CheckoutPage from './pages/CheckoutPage'
-import { AuthProvider } from './contexts/AuthContext'
-import { CheckoutProvider } from './contexts/CheckoutContext'
-import { ApparelProvider } from './contexts/ApparelContext'
+import ContextProvider from './context/ContextProvider'
+import LoginPage from './page/LoginPage'
+import ApparelPage from './page/ApparelPage'
+import BooksPage from './page/BooksPage'
+import CheckoutPage from './page/CheckoutPage'
 
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <CheckoutProvider>
-          <ApparelProvider>
-            <Routes>
-              <Route path='/' element={ <LoginPage /> } />
-              <Route path='/apparel' element={ <ApparelShopPage /> } />
-              <Route path='/checkout' element={ <CheckoutPage /> }></Route>
-            </Routes>
-          </ApparelProvider>
-        </CheckoutProvider>
-      </AuthProvider>
+      <ContextProvider>
+        <Routes>
+          <Route path='/' element={ <LoginPage /> } />
+          <Route path='/apparel' element={ <ApparelPage /> } />
+          <Route path='/books' element={ <BooksPage /> } />
+          <Route path='/checkout' element={ <CheckoutPage /> }></Route>
+        </Routes>
+      </ContextProvider>
     </BrowserRouter>
   )
 }

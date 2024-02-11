@@ -1,54 +1,24 @@
-import React, { useContext } from 'react'
-import CheckoutContext from '../../contexts/CheckoutContext'
-import '../../css/main/CheckoutComponent.css'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { incrementItem, decrementItem, deleteItem } from '../../redux/slice/checkoutSlice'
+import '../../css/main/Checkout.css'
 
-const CheckoutComponent = () => {
-  const { cart, setCart } = useContext(CheckoutContext)
+const Checkout = () => {
+  const dispatch = useDispatch()
+
+  const { cart } = useSelector((state) => state.checkout)
 
   const generateCartItem = (itemKey) => {
     const handleCartItemDecrementOnClick = (e) => {
-      if(cart.items[itemKey].quantity > 1) {
-        setCart((oldCart) => {
-          const newCart = { items: { ...oldCart.items }, totalPrice: oldCart.totalPrice, totalItems: oldCart.totalItems }
-
-          newCart.items[itemKey] = { ...newCart.items[itemKey] }
-
-          newCart.items[itemKey].quantity--
-
-          newCart.totalPrice -= newCart.items[itemKey].price
-          newCart.totalItems -= 1
-
-          return newCart
-        })
-      }
+      dispatch(decrementItem(itemKey))
     }
 
     const handleCartItemIncrementOnClick = (e) => {
-      setCart((oldCart) => {
-        const newCart = { items: { ...oldCart.items }, totalPrice: oldCart.totalPrice, totalItems: oldCart.totalItems }
-
-        newCart.items[itemKey] = { ...newCart.items[itemKey] }
-
-        newCart.items[itemKey].quantity++
-
-        newCart.totalPrice += newCart.items[itemKey].price
-        newCart.totalItems += 1
-
-        return newCart
-      })
+      dispatch(incrementItem(itemKey))
     }
 
     const handleCartItemDeleteOnClick = (e) => {
-      setCart((oldCart) => {
-        const newCart = { items: { ...oldCart.items }, totalPrice: oldCart.totalPrice, totalItems: oldCart.totalItems }
-
-        newCart.totalPrice -= newCart.items[itemKey].price * newCart.items[itemKey].quantity
-        newCart.totalItems -= newCart.items[itemKey].quantity
-
-        delete newCart.items[itemKey]
-
-        return newCart
-      })
+      dispatch(deleteItem(itemKey))
     }
 
     return (
@@ -93,4 +63,4 @@ const CheckoutComponent = () => {
   )
 }
 
-export default CheckoutComponent
+export default Checkout

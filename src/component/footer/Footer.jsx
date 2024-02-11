@@ -1,7 +1,7 @@
 import React from "react"
-import '../../css/footer/FooterComponent.css'
+import '../../css/footer/Footer.css'
 
-const FooterComponent = () => {
+const Footer = () => {
   return (
     <footer id='page-footer'>
       <section>
@@ -14,4 +14,4 @@ const FooterComponent = () => {
   )
 }
 
-export default FooterComponent
+export default Footer

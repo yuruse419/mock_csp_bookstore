@@ -1,0 +1,84 @@
+#apparel-main {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+#apparel-main-header {
+  background-color: #003055;
+  margin: 0;
+  padding: 10px;
+}
+
+#apparel-sort-section {
+  padding: 10px;
+  border-left: 1px solid;
+  border-right: 1px solid;
+}
+
+#apparel-items-sort-h3 {
+  margin: 0;
+  padding: 5px;
+}
+
+.apparel-items-sort-button {
+  margin: 0 5px;
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+#apparel-items-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: scroll;
+  margin: 0;
+  padding: 0;
+  border: 1px solid;
+}
+
+.apparel-item {
+  width: 200px;
+  overflow: hidden;
+  margin: 10px;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+.apparel-item-figure {
+  width: 200px;
+  height: 200px;
+}
+
+.apparel-item-figcaption {
+  height: 2.1em;
+  background-color: #003055;
+  overflow: hidden;
+}
+
+.apparel-item-details-section {
+  height: 5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5px;
+  background-color: #003055;
+}
+
+.apparel-item-description {
+  height: 3em;
+  overflow: hidden;
+  border-top: 1px solid;
+}
+
+.apparel-item-price {
+  border-top: 1px solid;
+}
+
+.apparel-item-add-to-cart-button {
+  width: 100%;
+  border: none;
+}
