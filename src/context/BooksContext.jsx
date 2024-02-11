@@ -36,7 +36,7 @@ export const BooksProvider = ({ children }) => {
 
   useEffect(() => {
     const handlefetchBookItems = async () => {
-      const response = await fetch('./src/context/Books.json')
+      const response = await fetch('jsonData/Books.json')
 
       if(response.ok) {
         const data = await response.json()
