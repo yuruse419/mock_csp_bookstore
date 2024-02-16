@@ -21,7 +21,7 @@ const clientRoutes = /^[\/](apparel|books|checkout)?$/
 
 // serve index.html from the static files for all client routes
 app.get(clientRoutes, (req, res) => {
-  res.sendFile('dist/index.html', { root: './' })
+  return res.sendFile('dist/index.html', { root: './' })
 })
 
 const dbQuery = async (collectionName, query, params = []) => {
@@ -45,16 +45,22 @@ const dbQuery = async (collectionName, query, params = []) => {
 
 app.post('/register', async (req, res) => {
   try {
-    const { username, password } = req.body
+    let { username, password } = req.body
 
-    const result = await dbQuery('user', 'find', [{ username: sanitize(username) }])
+    username = sanitize(username)
+
+    if(!username || !password) {
+      return res.json({ serverMessage: 'Please enter a valid username and password.' })
+    }
+
+    const result = await dbQuery('user', 'find', [{ username }])
     const foundUser = result[0]
 
     if(foundUser) {
-      res.json({ serverMessage: 'Could not register. Try another username.' })
+      return res.json({ serverMessage: 'Could not register. Try another username.' })
     }
     else {
-      bcrypt.hash(password, 10, async (err, hash) => {
+      return bcrypt.hash(password, 10, async (err, hash) => {
         if(err) {
           return res.status(500).json(err)
         }
@@ -68,22 +74,28 @@ app.post('/register', async (req, res) => {
     }
   }
   catch(err) {
-    res.status(500).json({ message: err.message })
+    return res.status(500).json({ message: err.message })
   }
 })
 
 app.post('/login', async (req, res) => {
   try {
-    const { username, password } = req.body
+    let { username, password } = req.body
 
-    const result = await dbQuery('user', 'find', [{ username: sanitize(username) }])
+    username = sanitize(username)
+
+    if(!username || !password) {
+      return res.json({ serverMessage: 'Please enter a valid username and password.' })
+    }
+
+    const result = await dbQuery('user', 'find', [{ username }])
     const foundUser = result[0]
 
     if(!foundUser) {
-      res.json({ serverMessage: 'Incorrect username and/or password.' })
+      return res.json({ serverMessage: 'Incorrect username and/or password.' })
     }
     else {
-      bcrypt.compare(password, foundUser.passwordHash, (err, result) => {
+      return bcrypt.compare(password, foundUser.passwordHash, (err, result) => {
         if(err) {
           return res.status(500).json(err)
         }
@@ -97,20 +109,20 @@ app.post('/login', async (req, res) => {
     }
   }
   catch(err) {
-    res.status(500).json({ message: err.message })
+    return res.status(500).json({ message: err.message })
   }
 })
 
 app.get('/all-books', async (req, res) => {
   const books = await dbQuery('book', 'find', [{}])
 
-  res.json(books)
+  return res.json(books)
 })
 
 app.get('/all-apparel', async (req, res) => {
   const apparel = await dbQuery('apparel', 'find', [{}])
 
-  res.json(apparel)
+  return res.json(apparel)
 })
 
 app.listen(port, () => {
