@@ -7,7 +7,7 @@ import './middleware/dotenv.js'
 import corsOptions from './middleware/corsOptions.js'
 import { connectDb, closeDb } from './middleware/db.js'
 
-const port = 3000 // process.env.PORT || 3000
+const port = process.env.PORT || 3000
 const app = express()
 
 app.use(express.json())
