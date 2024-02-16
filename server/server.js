@@ -13,6 +13,17 @@ const app = express()
 app.use(express.json())
 app.use(cors(corsOptions))
 
+// tell express to serve static files from the build folder, dist
+app.use(express.static('dist'))
+
+// regex for client routes: '/', '/apparel', '/books', '/checkout'
+const clientRoutes = /^[\/](apparel|books|checkout)?$/
+
+// serve index.html from the static files for all client routes
+app.get(clientRoutes, (req, res) => {
+  res.sendFile('dist/index.html', { root: './' })
+})
+
 const dbQuery = async (collectionName, query, params = []) => {
   const db = await connectDb()
 
@@ -90,13 +101,13 @@ app.post('/login', async (req, res) => {
   }
 })
 
-app.get('/book', async (req, res) => {
+app.get('/all-books', async (req, res) => {
   const books = await dbQuery('book', 'find', [{}])
 
   res.json(books)
 })
 
-app.get('/apparel', async (req, res) => {
+app.get('/all-apparel', async (req, res) => {
   const apparel = await dbQuery('apparel', 'find', [{}])
 
   res.json(apparel)

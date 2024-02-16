@@ -41,7 +41,7 @@ const Apparel = () => {
   // called only on the initial render
   useEffect(() => {
     const fetchApparelItems = async () => {
-      const response = await fetch(`${FetchUrl}/apparel`)
+      const response = await fetch(`${FetchUrl}/all-apparel`)
 
       if(response.ok) {
         const data = await response.json()

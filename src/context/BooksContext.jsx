@@ -37,7 +37,7 @@ export const BooksProvider = ({ children }) => {
 
   useEffect(() => {
     const handlefetchBookItems = async () => {
-      const response = await fetch(`${FetchUrl}/book`)
+      const response = await fetch(`${FetchUrl}/all-books`)
 
       if(response.ok) {
         const data = await response.json()

@@ -5,10 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "preview": "vite preview",
-    "server": "node ./server/server.js",
-    "dev": "concurrently \"vite\" \"npm run server\"",
-    "start": "serve dist"
+    "start": "node ./server/server.js",
+    "dev": "concurrently \"vite\" \"npm run start\""
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",

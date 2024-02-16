@@ -1,3 +1,5 @@
-const FetchUrl = 'mockcspbookstore-production.up.railway.app' // 'http://localhost:3000' 'mockcspbookstore-production.up.railway.app' 'mock_csp_bookstore.railway.internal'
+// development: 'http://localhost:3000' 
+// deployment: ''
+const FetchUrl = '' 
 
 export default FetchUrl
