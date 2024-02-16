@@ -41,14 +41,14 @@ export const checkoutSlice = createSlice({
     createItem: (state, action) => {
       const item = action.payload
 
-      if(state.cart.items[`${item.id}-apparel`]) {
-        state.cart.items[`${item.id}-apparel`].quantity++
+      if(state.cart.items[`${item._id}-apparel`]) {
+        state.cart.items[`${item._id}-apparel`].quantity++
       }
       else {
-        state.cart.items[`${item.id}-apparel`] = { ...item, quantity: 1 }
+        state.cart.items[`${item._id}-apparel`] = { ...item, quantity: 1 }
       }
 
-      state.cart.totalPrice += state.cart.items[`${item.id}-apparel`].price
+      state.cart.totalPrice += state.cart.items[`${item._id}-apparel`].price
 
       state.cart.totalItems += 1
     }

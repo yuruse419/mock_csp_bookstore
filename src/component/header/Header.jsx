@@ -23,6 +23,8 @@ const Header = () => {
 
   const handleLogoutOnClick = (e) => {
     navigate('/')
+
+    location.reload()
   }
 
   return (
@@ -43,14 +45,14 @@ const Header = () => {
 
           { 
             cart.totalItems ? 
-              <p>{ cart.totalItems }</p>
+              <p id='cart-total'>{ cart.totalItems }</p>
             :
               null
           }
         </fieldset>
 
         <fieldset>
-          <p>Welcome, { username }</p>
+          <p>Welcome, { username || 'User' }</p>
 
           <input id='logout-button' type='button' value='Logout' onClick={ handleLogoutOnClick }></input>
         </fieldset>

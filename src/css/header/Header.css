@@ -32,6 +32,14 @@
   padding: 0;
 }
 
+#cart-total {
+  width: 3em;
+  position: absolute;
+  top: 4px;
+  left: -3em;
+  text-align: end;
+}
+
 #logout-button {
   margin: 5px;
   border: 1px solid;

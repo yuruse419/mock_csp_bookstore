@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
+import FetchUrl from '../FetchUrl'
 
 const BooksContext = createContext()
 
@@ -36,7 +37,7 @@ export const BooksProvider = ({ children }) => {
 
   useEffect(() => {
     const handlefetchBookItems = async () => {
-      const response = await fetch('jsonData/Books.json')
+      const response = await fetch(`${FetchUrl}/book`)
 
       if(response.ok) {
         const data = await response.json()

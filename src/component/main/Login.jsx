@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import FetchUrl from '../../FetchUrl'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { setUsername, setPassword } from '../../redux/slice/authSlice'
+import { setUsername, setPassword, register, login } from '../../redux/slice/authSlice'
 import '../../css/main/Login.css'
 
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { username, password } = useSelector((state) => state.auth)
+  const { username, password, serverMessage } = useSelector((state) => state.auth)
 
   const handleUsernameOnChange = (e) => {
     dispatch(setUsername(e.target.value))
@@ -18,10 +19,48 @@ const Login = () => {
     dispatch(setPassword(e.target.value))
   }
 
-  const handleLoginOnClick = (e) => {
+  const handleRegisterOnClick = async (e) => {
     e.preventDefault()
 
-    navigate('/apparel')
+    const response = await fetch(`${FetchUrl}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    })
+    
+    if(response.ok) {
+      const data = await response.json()
+      
+      if(data.userId) {
+        navigate('/apparel')
+      }
+  
+      dispatch(register(data))
+    }
+  }
+
+  const handleLoginOnClick = async (e) => {
+    e.preventDefault()
+
+    const response = await fetch(`${FetchUrl}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    })
+    
+    if(response.ok) {
+      const data = await response.json()
+      
+      if(data.userId) {
+        navigate('/apparel')
+      }
+  
+      dispatch(login(data))
+    }
   }
 
   return (
@@ -31,7 +70,10 @@ const Login = () => {
     <form id='login-form'>
       {/* authentication fieldset */}
       <fieldset id='login-authenticate-fieldset'>
-        <legend>Authenticate</legend>
+        <legend id='login-authenticate-fieldset-legend'>Authenticate</legend>
+
+        {/* server message */}
+        <p id='server-message'>{ serverMessage }</p>
 
         {/* username input */}
         <label hidden htmlFor='username-input'></label>
@@ -47,7 +89,7 @@ const Login = () => {
         <legend>Submit</legend>
 
         {/* register button */}
-        <input id='register-button' type='submit' value='Register'></input>
+        <input id='register-button' type='button' value='Register' onClick={ handleRegisterOnClick }></input>
         <label hidden htmlFor='register-button'></label>
 
         {/* login button */}

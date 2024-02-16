@@ -3,7 +3,7 @@ import Header from '../component/header/Header'
 import Apparel from '../component/main/Apparel'
 import Footer from '../component/footer/Footer'
 
-const ApparelShopPage = () => {
+const ApparelPage = () => {
   return (
     <>
       <Header></Header>
@@ -13,4 +13,4 @@ const ApparelShopPage = () => {
   )
 }
 
-export default ApparelShopPage
+export default ApparelPage

@@ -11,10 +11,10 @@ const Books = () => {
 
   const handleAddToCartOnClick = (e) => {
     const idDelimiter = e.target.id.indexOf('-')
-    const itemId = Number(e.target.id.substring(0, idDelimiter))
+    const itemId = e.target.id.substring(0, idDelimiter)
 
     for(let bookItem of bookItems) {
-      if(bookItem.id === itemId) {
+      if(bookItem._id === itemId) {
         dispatch(createItem(bookItem))
 
         break
@@ -36,7 +36,7 @@ const Books = () => {
     */
 
     return (
-      <li key={ item.id } id={ item.id } className='book-item'>
+      <li key={ item._id } id={ item._id } className='book-item'>
         <figure className='book-item-figure'>
           <img src={ item.thumbnail }></img>
 
@@ -52,7 +52,7 @@ const Books = () => {
         </section>
 
         <section>
-          <input id={ `${item.id}-book-item-add-to-cart-button` } className='book-item-add-to-cart-button' type='button' value='Add to Cart' onClick={ handleAddToCartOnClick }></input>
+          <input id={ `${item._id}-book-item-add-to-cart-button` } className='book-item-add-to-cart-button' type='button' value='Add to Cart' onClick={ handleAddToCartOnClick }></input>
         </section>
       </li>
     )

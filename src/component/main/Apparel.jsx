@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import FetchUrl from '../../FetchUrl'
 import { useSelector, useDispatch } from 'react-redux'
 import { createItem } from '../../redux/slice/checkoutSlice'
 import { setApparelItems, setSortedBy } from '../../redux/slice/apparelSlice'
@@ -40,12 +41,12 @@ const Apparel = () => {
   // called only on the initial render
   useEffect(() => {
     const fetchApparelItems = async () => {
-      const response = await fetch('https://dummyjson.com/products/category/tops')
+      const response = await fetch(`${FetchUrl}/apparel`)
 
       if(response.ok) {
         const data = await response.json()
 
-        dispatch(setApparelItems(sortApparelItems(data.products)))
+        dispatch(setApparelItems(sortApparelItems(data)))
       }
     }
 
@@ -60,10 +61,10 @@ const Apparel = () => {
 
   const handleAddToCartOnClick = (e) => {
     const idDelimiter = e.target.id.indexOf('-')
-    const itemId = Number(e.target.id.substring(0, idDelimiter))
-
+    const itemId = e.target.id.substring(0, idDelimiter)
+ 
     for(let apparelItem of apparelItems) {
-      if(apparelItem.id === itemId) {
+      if(apparelItem._id === itemId) {
         dispatch(createItem(apparelItem))
 
         break
@@ -93,7 +94,7 @@ const Apparel = () => {
     */
 
     return (
-      <li key={ item.id } id={ item.id } className='apparel-item'>
+      <li key={ item._id } id={ item._id } className='apparel-item'>
         <figure className='apparel-item-figure'>
           <img src={ item.thumbnail }></img>
 
@@ -109,7 +110,7 @@ const Apparel = () => {
         </section>
 
         <section>
-          <input id={ `${item.id}-apparel-item-add-to-cart-button` } className='apparel-item-add-to-cart-button' type='button' value='Add to Cart' onClick={ handleAddToCartOnClick }></input>
+          <input id={ `${item._id}-apparel-item-add-to-cart-button` } className='apparel-item-add-to-cart-button' type='button' value='Add to Cart' onClick={ handleAddToCartOnClick }></input>
         </section>
       </li>
     )
