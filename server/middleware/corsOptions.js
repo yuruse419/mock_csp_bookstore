@@ -10,7 +10,7 @@ const allowedOrigins = [
 
   'http://localhost:5173',
   'http://localhost:3000',
-  'mockcspbookstore-production.up.railway.app'
+  'https://mockcspbookstore-production.up.railway.app'
 ]
 
 const corsOptions = {
